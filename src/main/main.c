@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/21 23:37:20 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/10/16 18:39:52 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,28 @@ void	free_while(char *s1, char **splitted)
 // et s'occupe (pour le moment) d'un bout de parsing (cest faux ca s'occupe pas dutout de rien dutout)
 int	while_loop(t_shell *shell)
 {
-	char	*save_line;
+	//char	*save_line;
 
 	while (1)
 	{
-		change_color(1, PINK);
-		shell->useful->display = ft_strjoin(shell->useful->cwd, INPUTCLR);
+		//change_color(1, PINK);
+		shell->useful.display = ft_strjoin(shell->useful.cwd, INPUTCLR);
 		signal(SIGINT, handle_signaux);
-		shell->line = readline(shell->useful->display);
-		free(shell->useful->display);
-		save_line = shell->line;
-		if (save_line == NULL)
-			break ;
-		while (*save_line == ' ' || *save_line == '\t')
-			save_line++;
-		if (*save_line)
+		shell->line = readline(shell->useful.display);
+		free(shell->useful.display);
+		//save_line = shell->line;
+		//if (save_line == NULL)
+		//	break ;
+		//while (*save_line == ' ' || *save_line == '\t')
+		//	save_line++;
+		if (*shell->line)
 		{
-			shell->to_parse = ft_split(save_line, ' ');
+				shell->to_parse = ft_split(shell->line, ' ');
 			if (!strcmp("exit", shell->to_parse[0]))
 			{
 				free_while(NULL, shell->to_parse);
 				break ;
 			}
-			else if (!strcmp("cd", shell->to_parse[0]))
-			{
-				if (shell->to_parse[1])
-					cmd_cd(shell->useful, shell->to_parse[1]);
-			}
-			else if (!strcmp("pwd", shell->to_parse[0]))
-				cmd_pwd(shell->useful, 1);
-			else if (!strcmp("env", shell->to_parse[0]))
-				cmd_env(shell->env);
 			free_while(shell->line, shell->to_parse);
 		}
 	}
