@@ -52,4 +52,4 @@ build:
 prune:
 	docker system prune -a --volumes
 
-.PHONY: re fclean clean all build prune
+.PHONY: re fclean clean all build 
