@@ -2,6 +2,7 @@
 minishell
 Minishell
 a.out
+.DS_Store
 
 # Prerequisites
 *.d
