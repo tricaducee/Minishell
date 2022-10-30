@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/19 18:41:22 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/10/30 23:26:10 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 void	handle_signaux(int sig);
 
 /* ----------------- __INIT__ --------------- */
-int		__init__(t_shell *shell);
+int		__init__(t_shell *shell, char **v_env);
 
 /* ----------------- BUILT IN --------------- */
 int		cmd_echo(int n, char *display);
@@ -54,6 +54,8 @@ int		ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 void	change_color(int fd, char *color);
 char	**ft_split(char *s, char c);
+t_env 	*create_parsed_node(char *str);
+int		modify_node(t_env *node, char *str);
 
 /* ------------------ FREE ------------------- */
 void	handle_error(char *str);

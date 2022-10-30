@@ -6,7 +6,7 @@
 /*   By: tgoel <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:40:20 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/12 15:40:58 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/10/30 17:38:45 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@
  *  
 */
 
-static void	free_useful(t_useful *useful)
-{
-	if (useful)
-	{
-		free(useful);
-		useful = NULL;
-	}
-}
-
 void	free_struct(t_shell *shell)
 {
 	if (shell)
@@ -40,5 +31,4 @@ void	free_struct(t_shell *shell)
 			shell->line = NULL;
 		}
 	}
-	free_useful(shell->useful);
 }

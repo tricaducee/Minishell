@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/21 23:37:20 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/10/30 23:26:39 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,17 @@ void	free_while(char *s1, char **splitted)
 	}
 }
 
-// main program
-// permet de prendre la ligne avec readline
-// et s'occupe (pour le moment) d'un bout de parsing (cest faux ca s'occupe pas dutout de rien dutout)
 int	while_loop(t_shell *shell)
 {
 	char	*save_line;
 
 	while (1)
 	{
-		change_color(1, PINK);
-		shell->useful->display = ft_strjoin(shell->useful->cwd, INPUTCLR);
+		//change_color(1, PINK);
+		shell->useful.display = ft_strjoin(shell->useful.cwd, INPUTCLR);
 		signal(SIGINT, handle_signaux);
-		shell->line = readline(shell->useful->display);
-		free(shell->useful->display);
+		shell->line = readline(shell->useful.display);
+		free(shell->useful.display);
 		save_line = shell->line;
 		if (save_line == NULL)
 			break ;
@@ -62,15 +59,6 @@ int	while_loop(t_shell *shell)
 				free_while(NULL, shell->to_parse);
 				break ;
 			}
-			else if (!strcmp("cd", shell->to_parse[0]))
-			{
-				if (shell->to_parse[1])
-					cmd_cd(shell->useful, shell->to_parse[1]);
-			}
-			else if (!strcmp("pwd", shell->to_parse[0]))
-				cmd_pwd(shell->useful, 1);
-			else if (!strcmp("env", shell->to_parse[0]))
-				cmd_env(shell->env);
 			free_while(shell->line, shell->to_parse);
 		}
 	}
@@ -85,9 +73,12 @@ int	main(int argc, char **argv, char **env)
 	shell.env = env;
 	if (!argc || argv)
 		write(1, "", 1);
-	if (__init__(&shell))
+	if (__init__(&shell, env))
 		handle_error("Error initializating the struct");
-	while_loop(&shell);
+	//shell.global_env.name = 
+	modify_node(&(shell.global_env), "PATH=this_is_a_test");
+	shell.global_env.next = create_parsed_node("PATH2=this_is_a_test2");
+	//while_loop(&shell);
 	free_struct(&shell);
 	return (0);
 }

@@ -1,10 +1,12 @@
 MAIND	= ./src/main
 BUILD	= ./src/builtin
 UTILD	= ./src/utils
+PARSD	= ./src/parsing
 
 MAINS	= main.c signaux.c
 BUILS	= builtin.c
 UTILS	= __init__.c ft_strlen.c ft_strdup.c ft_strjoin.c free_struct.c change_color.c ft_split.c handle_error.c
+PARSS	= p_env.c
 
 NAME	= minishell
 
@@ -20,8 +22,9 @@ CC		= cc $(FLAGS)
 MAINO	= $(addprefix $(MAIND)/,$(MAINS))
 UTILO	= $(addprefix $(UTILD)/,$(UTILS))
 BUILO	= $(addprefix $(BUILD)/,$(BUILS))
+PARSO	= $(addprefix $(PARSD)/,$(PARSS))
 
-FILES	= $(MAINO) $(BUILO) $(UTILO)
+FILES	= $(MAINO) $(BUILO) $(UTILO) $(PARSO)
 
 OBJS	= $(FILES:.c=.o)
 
@@ -44,12 +47,14 @@ fclean: clean
 	@printf "Cleaning executable\n"
 	@rm -f $(NAME)
 
-re: fclean all
 
 build:
 	docker build -t arch .
 	docker run -ti arch
+
 prune:
 	docker system prune -a --volumes
 
-.PHONY: re fclean clean all
+re: fclean all
+
+.PHONY: re fclean clean all build prune

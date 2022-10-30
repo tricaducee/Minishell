@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:18:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/21 23:22:44 by tgoel            ###   ########.fr       */
+/*   Created: 2022/10/30 16:47:16 by tgoel             #+#    #+#             */
+/*   Updated: 2022/10/30 21:57:56 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,24 @@
 
 # include "minishell.h"
 
+typedef struct	S_cmdli
+{
+	char			*cmd_path;
+	char			**cmd_args;
+	int				**pipe_in;
+	int				**pipe_out;
+	int				fd_in;
+	int				fd_out;
+	int				and_or;
+	struct S_cmdli	*previous;
+	struct S_cmdli	*next;
+}	t_cmdli;
+
 typedef struct S_env
 {
-	char	*val;
+	char	*value;
+	char	*name;
 	struct S_env *next;
-	struct S_env *prev;
 }	t_env;
 
 typedef struct S_useful
@@ -33,7 +46,9 @@ typedef struct S_shell
 	char		**env;
 	char		**to_parse;
 	char		*line;
-	t_useful	*useful;
+	t_cmdli		cmdli;
+	t_useful	useful;
+	t_env		global_env;
 }	t_shell;
 
 #endif

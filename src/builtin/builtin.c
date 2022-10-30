@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:41 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/21 23:11:39 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/10/30 16:52:22 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	cmd_export(char *exported)
 	if (!exported)
 		return (1);
 	printf("Does nothing for now: EXPORT\n");
-	return (1);;
+	return (1);
 }
 
 int	cmd_pwd(t_useful *useful, int display)
