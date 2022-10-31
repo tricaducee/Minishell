@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:47:16 by tgoel             #+#    #+#             */
-/*   Updated: 2022/10/30 21:57:56 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/10/31 16:39:34 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ typedef struct	S_cmdli
 
 typedef struct S_env
 {
-	char	*value;
+	int		index;
 	char	*name;
+	char	*value;
 	struct S_env *next;
 }	t_env;
 
@@ -43,6 +44,7 @@ typedef struct S_useful
 
 typedef struct S_shell
 {
+	t_env		*head_node_env;
 	char		**env;
 	char		**to_parse;
 	char		*line;

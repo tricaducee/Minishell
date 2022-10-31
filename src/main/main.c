@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/10/30 23:26:39 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/10/31 16:27:11 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ int	main(int argc, char **argv, char **env)
 		write(1, "", 1);
 	if (__init__(&shell, env))
 		handle_error("Error initializating the struct");
-	//shell.global_env.name = 
-	modify_node(&(shell.global_env), "PATH=this_is_a_test");
-	shell.global_env.next = create_parsed_node("PATH2=this_is_a_test2");
 	//while_loop(&shell);
-	free_struct(&shell);
+	//free_struct(&shell);
 	return (0);
 }
