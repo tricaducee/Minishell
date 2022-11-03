@@ -5,7 +5,7 @@ PARSD	= ./src/parsing
 
 MAINS	= main.c signaux.c
 BUILS	= builtin.c
-UTILS	= __init__.c ft_strlen.c ft_strdup.c ft_strjoin.c free_struct.c change_color.c ft_split.c handle_error.c
+UTILS	= __init__.c ft_strlen.c ft_strdup.c ft_strjoin.c free_struct.c change_color.c ft_split.c handle_error.c ft_strcmp.c
 PARSS	= p_env.c
 
 NAME	= minishell

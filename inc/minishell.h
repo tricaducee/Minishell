@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/10/30 23:26:10 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/03 01:37:37 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ int		ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 void	change_color(int fd, char *color);
 char	**ft_split(char *s, char c);
-t_env 	*create_parsed_node(char *str);
+t_env	*create_parsed_node(char *str);
 int		modify_node(t_env *node, char *str);
+int		ft_strcmp(char *s1, char *s2);
+t_env	*create_node_name_value(char *name, char *value);
 
 /* ------------------ FREE ------------------- */
 void	handle_error(char *str);

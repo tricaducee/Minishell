@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/10/31 16:27:11 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/03 01:41:03 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int	while_loop(t_shell *shell)
 
 	while (1)
 	{
-		//change_color(1, PINK);
+		change_color(1, PINK);
 		shell->useful.display = ft_strjoin(shell->useful.cwd, INPUTCLR);
 		signal(SIGINT, handle_signaux);
 		shell->line = readline(shell->useful.display);
+		add_history(shell->line);
 		free(shell->useful.display);
 		save_line = shell->line;
 		if (save_line == NULL)
@@ -70,11 +71,10 @@ int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
 
-	shell.env = env;
 	if (!argc || argv)
 		write(1, "", 1);
 	if (__init__(&shell, env))
-		handle_error("Error initializating the struct");
+		return (1);
 	//while_loop(&shell);
 	//free_struct(&shell);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 21:37:25 by tgoel             #+#    #+#             */
-/*   Updated: 2022/10/31 16:05:45 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/03 01:37:40 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,23 @@ static char	*split_after_equal(char *str)
 	a_equal[i] = 0;
 	return (a_equal);
 }
-/*
-static char	*ft_strldup(int start, char *str)
-{
-	int	i;
-	char	*new_str;
 
-	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(str) - start) + 1);
-	while (str[i] && str[start + i])
-	{
-		new_str[i] = str[start + i];
-		i++;
-	}
-	new_str[i] = 0;
-	return (new_str);
-}
-*/
 int	modify_node(t_env *node, char *str)
 {
 	node->name = split_before_equal(str);
 	node->value = split_after_equal(str + (len_b_equal(str) + 1));
 	return (0);
+}
+
+t_env *create_node_name_value(char *name, char *value)
+{
+	t_env	*new_node;
+
+	new_node = malloc(sizeof(t_env));
+	new_node->name = name;
+	new_node->value = value;
+	new_node->next = NULL;
+	return (new_node);
 }
 
 t_env *create_parsed_node(char *str)
