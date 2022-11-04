@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_base_u.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:49:14 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:27:44 by tgoel            ###   ########.fr       */
+/*   Created: 2022/05/23 17:15:16 by hrolle            #+#    #+#             */
+/*   Updated: 2022/06/16 10:39:15 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
-{
-	int	i;
+#include "../HEADER/ft_printfd.h"
 
-	if (!str)
-		return (0);
-	i = 0;
-	while(str[i])
-		i++;
-	return (i);
+void	ft_putnbrb_fd(int fd, unsigned long n, char *str, unsigned long base)
+{
+	unsigned int	nb;
+
+	nb = n;
+	if (n >= base)
+		ft_putnbrb_fd(fd, n / base, str, base);
+	ft_putchar_fd(fd, str[nb % base]);
 }

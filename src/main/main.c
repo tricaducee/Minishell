@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/03 01:41:03 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 07:57:46 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,28 @@ void	free_while(char *s1, char **splitted)
 
 int	while_loop(t_shell *shell)
 {
-	char	*save_line;
+	char	*read;
+	t_cmdli	*cmdli;
+	//t_cmdli	*cmdli_i;
 
 	while (1)
 	{
 		change_color(1, PINK);
 		shell->useful.display = ft_strjoin(shell->useful.cwd, INPUTCLR);
 		signal(SIGINT, handle_signaux);
-		shell->line = readline(shell->useful.display);
-		add_history(shell->line);
+		read = readline(shell->useful.display);
 		free(shell->useful.display);
-		save_line = shell->line;
-		if (save_line == NULL)
-			break ;
-		while (*save_line == ' ' || *save_line == '\t')
-			save_line++;
-		if (*save_line)
+		if (read)
 		{
-			shell->to_parse = ft_split(save_line, ' ');
-			if (!strcmp("exit", shell->to_parse[0]))
-			{
-				free_while(NULL, shell->to_parse);
-				break ;
-			}
-			free_while(shell->line, shell->to_parse);
+			add_history(read);
+			signal(SIGINT, handle_signaux);
+			cmdli = get_cmds(&read);
+			free(read);
 		}
 	}
 	return (0);
 }
 
-// initialiser les structs
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
@@ -75,7 +67,7 @@ int	main(int argc, char **argv, char **env)
 		write(1, "", 1);
 	if (__init__(&shell, env))
 		return (1);
-	//while_loop(&shell);
-	//free_struct(&shell);
-	return (0);
+	while_loop(&shell);
+	free_struct(&shell);
+	exit(0);
 }

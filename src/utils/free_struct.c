@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:40:20 by tgoel             #+#    #+#             */
-/*   Updated: 2022/10/30 17:38:45 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 07:50:44 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@
  *  
 */
 
+
+void	free_export(t_variables **vars)
+{
+	t_variables	*tmp;
+
+	while (*vars)
+	{
+		tmp = *vars;
+		free((*vars)->name);
+		free((*vars)->value);
+		*vars = (*vars)->next;
+		free(tmp);
+	}
+}
+
+
 void	free_struct(t_shell *shell)
 {
 	if (shell)
@@ -31,4 +47,6 @@ void	free_struct(t_shell *shell)
 			shell->line = NULL;
 		}
 	}
+	free_cmdli(&shell->cmdli);
+	free_export(&shell->export);
 }

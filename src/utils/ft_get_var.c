@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_get_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:59:22 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:30:38 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/01 04:32:21 by hrolle            #+#    #+#             */
+/*   Updated: 2022/11/04 04:31:09 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_strdup(char	*str)
+/*
+	Our getenv function
+*/
+char	*ft_get_var(char *substr)
 {
-	int		i;
-	char	*new_str;
+	t_shell		*shell;
+	t_variables	*env;
 
-	i = 0;
-	new_str = malloc(sizeof(char) * ft_strlen(str) + 1);
-	if (!new_str)
+	shell = ft_get_shell(NULL);
+	env = shell->env;
+	if (!env || !substr)
 		return (NULL);
-	while (str[i])
+	if (!ft_strcmp(substr, "?"))
+		return (ft_itoa(g_errno));
+	while (env)
 	{
-		new_str[i] = str[i];
-		i++;
+		if (!ft_strcmp(env->name, substr))
+			return (ft_strdup(env->value));
+		env = env->next;
 	}
-	new_str[i] = 0;
-	return (new_str);
+	return (ft_strdup(""));
 }
-

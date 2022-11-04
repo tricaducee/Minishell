@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   add_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:59:22 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:30:38 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/01 06:54:52 by hrolle            #+#    #+#             */
+/*   Updated: 2022/11/04 04:03:02 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_strdup(char	*str)
+void	add_cmd(t_cmdli **cmds_list, char *cmd, t_type *type)
 {
-	int		i;
-	char	*new_str;
-
-	i = 0;
-	new_str = malloc(sizeof(char) * ft_strlen(str) + 1);
-	if (!new_str)
-		return (NULL);
-	while (str[i])
-	{
-		new_str[i] = str[i];
-		i++;
-	}
-	new_str[i] = 0;
-	return (new_str);
+	add_arg(cmds_list, cmd, type);
+	*type = CMD;
+	if (*cmds_list)
+		(*cmds_list)->cmd = (*cmds_list)->cmd_args[0];
 }
-

@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:59:22 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:30:38 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/04 04:37:29 by tgoel             #+#    #+#             */
+/*   Updated: 2022/11/04 04:37:42 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_strdup(char	*str)
+char	*ft_substr(char *s, unsigned int start, unsigned int len)
 {
-	int		i;
-	char	*new_str;
+	char			*ret;
+	unsigned int	i;
+	unsigned int	f_len;
 
+	if (!s)
+		return (0);
+	f_len = ft_strlen(s);
+	if (start >= f_len)
+		return (ft_strdup(""));
+	if (len > f_len - start)
+		len = f_len - start;
+	ret = malloc((len + 1) * sizeof(char));
+	if (!ret)
+		return (0);
 	i = 0;
-	new_str = malloc(sizeof(char) * ft_strlen(str) + 1);
-	if (!new_str)
-		return (NULL);
-	while (str[i])
+	while (s[start + i] && i < len)
 	{
-		new_str[i] = str[i];
+		ret[i] = s[start + i];
 		i++;
 	}
-	new_str[i] = 0;
-	return (new_str);
+	ret[i] = 0;
+	return (ret);
 }
-

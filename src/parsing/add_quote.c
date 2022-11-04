@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   add_quote.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:59:22 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:30:38 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/01 06:58:54 by hrolle            #+#    #+#             */
+/*   Updated: 2022/11/04 04:03:14 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_strdup(char	*str)
+char	*add_quote(char **cmdline, char *str, unsigned int *i)
 {
-	int		i;
-	char	*new_str;
+	char			*ret;
+	unsigned int	j;
+	char			*tmp;
+	char			*new;
 
-	i = 0;
-	new_str = malloc(sizeof(char) * ft_strlen(str) + 1);
-	if (!new_str)
-		return (NULL);
-	while (str[i])
+	++*i;
+	ret = NULL;
+	j = 0;
+	while ((*cmdline)[*i + j] && (*cmdline)[*i + j] != '\'')
+		j++;
+	tmp = str;
+	new = ft_substr((*cmdline), *i, j);
+	if (!new)
 	{
-		new_str[i] = str[i];
-		i++;
+		if (tmp)
+			free(tmp);
+		return (NULL);
 	}
-	new_str[i] = 0;
-	return (new_str);
+	ret = ft_strjoin(str, new);
+	free(new);
+	if (tmp)
+		free(tmp);
+	if (ret)
+		*i += j + 1;
+	return (ret);
 }
-

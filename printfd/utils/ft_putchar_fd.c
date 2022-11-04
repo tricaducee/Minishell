@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:49:14 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:27:44 by tgoel            ###   ########.fr       */
+/*   Created: 2022/05/23 17:14:45 by hrolle            #+#    #+#             */
+/*   Updated: 2022/06/16 10:44:45 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
-{
-	int	i;
+#include "../HEADER/ft_printfd.h"
 
-	if (!str)
-		return (0);
-	i = 0;
-	while(str[i])
-		i++;
-	return (i);
+void	ft_putchar_fd(int fd, char c)
+{
+	write(fd, &c, 1);
+}
+
+void	repeat_putchar_fd(int fd, char c, int len)
+{
+	while (len > 0)
+	{
+		ft_putchar_fd(fd, c);
+		len--;
+	}
 }

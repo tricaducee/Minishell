@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 21:37:25 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/03 01:37:40 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 04:15:27 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,29 @@ static char	*split_after_equal(char *str)
 	return (a_equal);
 }
 
-int	modify_node(t_env *node, char *str)
+int	modify_node(t_variables *node, char *str)
 {
 	node->name = split_before_equal(str);
 	node->value = split_after_equal(str + (len_b_equal(str) + 1));
 	return (0);
 }
 
-t_env *create_node_name_value(char *name, char *value)
+t_variables *create_node_name_value(char *name, char *value)
 {
-	t_env	*new_node;
+	t_variables	*new_node;
 
-	new_node = malloc(sizeof(t_env));
+	new_node = malloc(sizeof(t_variables));
 	new_node->name = name;
 	new_node->value = value;
 	new_node->next = NULL;
 	return (new_node);
 }
 
-t_env *create_parsed_node(char *str)
+t_variables *create_parsed_node(char *str)
 {
-	t_env	*next_node;
+	t_variables	*next_node;
 
-	next_node = malloc(sizeof(t_env));
+	next_node = malloc(sizeof(t_variables));
 	modify_node(next_node, str);
 	next_node->next = NULL;
 	return (next_node);

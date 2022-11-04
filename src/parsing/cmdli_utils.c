@@ -1,32 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   cmdli_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:59:22 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:30:38 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/01 06:42:18 by hrolle            #+#    #+#             */
+/*   Updated: 2022/11/04 04:23:43 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_strdup(char	*str)
+int	ft_strcmp_int(char *s1, char *s2)
 {
-	int		i;
-	char	*new_str;
-
-	i = 0;
-	new_str = malloc(sizeof(char) * ft_strlen(str) + 1);
-	if (!new_str)
-		return (NULL);
-	while (str[i])
+	while (*s1 && *s2 && *s1 == *s2)
 	{
-		new_str[i] = str[i];
-		i++;
+		s1++;
+		s2++;
 	}
-	new_str[i] = 0;
-	return (new_str);
+	if (*s1 || *s2)
+		return (0);
+	return (1);
 }
 
+int	ft_strslen(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
+
+char	**ft_strsjoin(char *s, char **ss)
+{
+	char			**ret;
+	unsigned int	i;
+
+	ret = malloc((ft_strslen(ss) + 2) * sizeof(char *));
+	if (!ret)
+		return (NULL);
+	i = 0;
+	if (ss)
+	{
+		while (ss[i])
+		{
+			ret[i] = ss[i];
+			++i;
+		}
+	}
+	ret[i] = s;
+	ret[++i] = 0;
+	return (ret);
+}

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 15:58:57 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/11 17:09:16 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 04:39:29 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static char	*ft_substr2(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
 	size_t	x;
@@ -100,7 +100,7 @@ char	**ft_split(char *s, char c)
 	{
 		while (*s == c && *s != '\0')
 			s++;
-		array[i] = ft_substr((char *)s, 0, block_len((char *)s, c));
+		array[i] = ft_substr2((char *)s, 0, block_len((char *)s, c));
 		if (!array)
 			return (array_free(array, i));
 		s = s + block_len((char *)s, c);

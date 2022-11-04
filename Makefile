@@ -2,11 +2,20 @@ MAIND	= ./src/main
 BUILD	= ./src/builtin
 UTILD	= ./src/utils
 PARSD	= ./src/parsing
+PRINTD	= ./printfd
 
 MAINS	= main.c signaux.c
 BUILS	= builtin.c
-UTILS	= __init__.c ft_strlen.c ft_strdup.c ft_strjoin.c free_struct.c change_color.c ft_split.c handle_error.c ft_strcmp.c
-PARSS	= p_env.c
+UTILS	= __init__.c ft_strlen.c ft_strdup.c ft_strjoin.c free_struct.c change_color.c ft_split.c handle_error.c ft_strcmp.c ft_get_env.c ft_get_export.c ft_get_shell.c \
+		  ft_get_str_env.c ft_get_var.c ft_itoa.c ft_substr.c
+PARSS	= add_andor.c add_cmd.c add_file.c add_quote.c cmdli_first.c create_cmdli.c free_cmdli.c get_cmds.c p_env.c print_tab.c type_and_set.c \
+		  add_arg.c add_dquote.c add_pipe.c add_var.c cmdli_utils.c error_cmdli.c free_tab.c heredoc.c print_cmdli.c  split_cmd.c
+
+PRINTS = counters/ft_strlen2.c main/flags_check_fd.c print_functions/print_len_fd.c print_functions/print_upx_fd.c	\
+		text_mod/text_mod_fd.c utils/ft_putstr_fd.c counters/len_atoi.c main/ft_printfd.c print_functions/print_o_fd.c print_functions/print_x_fd.c \
+		utils/ft_putchar_fd.c utils/ft_strchr.c counters/nbrlen.c print_functions/print_c_fd.c print_functions/print_s_fd.c text_mod/bright_fd.c \
+		utils/ft_putnbr_fd.c counters/u_nbrlen_base.c print_functions/print_d_fd.c print_functions/print_u_fd.c text_mod/flags_text_fd.c \
+		utils/ft_putnbrb_fd.c
 
 NAME	= minishell
 
@@ -23,8 +32,9 @@ MAINO	= $(addprefix $(MAIND)/,$(MAINS))
 UTILO	= $(addprefix $(UTILD)/,$(UTILS))
 BUILO	= $(addprefix $(BUILD)/,$(BUILS))
 PARSO	= $(addprefix $(PARSD)/,$(PARSS))
+PRINTO	= $(addprefix $(PRINTD)/,$(PRINTS))
 
-FILES	= $(MAINO) $(BUILO) $(UTILO) $(PARSO)
+FILES	= $(MAINO) $(BUILO) $(UTILO) $(PARSO) $(PRINTO)
 
 OBJS	= $(FILES:.c=.o)
 
@@ -36,7 +46,7 @@ $(NAME) : $(OBJS)
 	@printf "Done\n"
 
 %.o: %.c
-	@printf "Compiling %-33.333s \r" $<
+	@printf "Compiling %-43.333s \r" $<
 	@$(CC) -c $< -o $@
 
 clean:

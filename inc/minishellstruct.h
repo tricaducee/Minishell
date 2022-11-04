@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:47:16 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/02 22:11:01 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 07:35:31 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,47 @@
 
 # include "minishell.h"
 
-typedef struct	S_cmdli
+int	g_errno;
+
+typedef enum E_type
 {
-	char			*cmd_path;
+	EMPTY,
+	CMD,
+	ARG,
+	PIPE,
+	RFILE,
+	RDI,
+	RDO,
+	RDIH,
+	RDOA,
+	ANDOR
+}			t_type;
+
+typedef struct S_cmdli
+{
+	char			*cmd;
 	char			**cmd_args;
-	char			**file_in;
-	char			**file_out;
 	int				*pipe_in;
 	int				*pipe_out;
+	char			*here_doc;
 	int				fd_in;
 	int				fd_out;
+	char			**file_in;
+	char			**file_out;
+	t_type			file_type;
 	int				and_or;
+	pid_t			pid;
+	int				cmd_error;
 	struct S_cmdli	*previous;
 	struct S_cmdli	*next;
 }	t_cmdli;
 
-typedef struct S_env
+typedef struct S_variables
 {
-	char	*name;
-	char	*value;
-	struct S_env *next;
-}	t_env;
+	char				*name;
+	char				*value;
+	struct S_variables	*next;
+}	t_variables;
 
 typedef struct S_useful
 {
@@ -45,13 +65,13 @@ typedef struct S_useful
 
 typedef struct S_shell
 {
-	char		**to_parse;
+	char		**str_env;
 	char		*line;
 	t_cmdli		cmdli;
 	t_useful	useful;
-	t_env		*env;
-	t_env		*export;
-	t_env		*variables;
+	t_variables	*env;
+	t_variables	*export;
+	t_variables	*variables;
 }	t_shell;
 
 #endif

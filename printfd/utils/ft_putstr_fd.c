@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:49:14 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:27:44 by tgoel            ###   ########.fr       */
+/*   Created: 2022/05/23 17:15:52 by hrolle            #+#    #+#             */
+/*   Updated: 2022/06/16 12:21:54 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include "../HEADER/ft_printfd.h"
+
+void	ft_putstr_fd(int fd, char *s)
+{
+	if (!s)
+		return ;
+	while (*s)
+		write(fd, s++, 1);
+}
+
+void	ft_putlstr_fd(int fd, char *s, int len)
 {
 	int	i;
 
-	if (!str)
-		return (0);
+	if (!s)
+		return ;
 	i = 0;
-	while(str[i])
-		i++;
-	return (i);
+	while (i < len)
+		write(fd, s + i++, 1);
 }

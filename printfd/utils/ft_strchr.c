@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:49:14 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:27:44 by tgoel            ###   ########.fr       */
+/*   Created: 2022/05/23 17:16:09 by hrolle            #+#    #+#             */
+/*   Updated: 2022/06/16 10:48:24 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
-{
-	int	i;
+#include "../HEADER/ft_printfd.h"
 
-	if (!str)
-		return (0);
-	i = 0;
-	while(str[i])
-		i++;
-	return (i);
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == ((char)c))
+			return ((char *)s);
+		s++;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return (0);
 }

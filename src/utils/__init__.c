@@ -6,15 +6,15 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:26:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/03 02:52:13 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 05:51:14 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-t_env	*__init_env(t_env *node, char **v_env)
+t_variables	*__init_variables(t_variables *node, char **v_env)
 {
-	t_env	*ret;
+	t_variables	*ret;
 	int		i;
 	char	*tmp;
 
@@ -40,10 +40,10 @@ static int	__init_useful(t_useful *useful)
 	return (0);
 }
 
-void    sort_alpha(t_env **exp, t_env *new_node)
+void    sort_alpha(t_variables **exp, t_variables *new_node)
 {
-    t_env    *prev;
-    t_env    *current;
+    t_variables    *prev;
+    t_variables    *current;
 
     prev = NULL;
     current = *exp;
@@ -65,9 +65,9 @@ void    sort_alpha(t_env **exp, t_env *new_node)
         prev->next = new_node;
 }
 
-t_env	*__init_exp(t_env *old_env)
+t_variables	*__init_exp(t_variables *old_env)
 {
-	t_env	*exp;
+	t_variables	*exp;
 
 	if (!old_env)
 		return (NULL);
@@ -80,7 +80,7 @@ t_env	*__init_exp(t_env *old_env)
 	return (exp);
 }
 
-void	print_exp(t_env *exp)
+void	print_exp(t_variables *exp)
 {
 	while (exp)
 	{
@@ -89,16 +89,24 @@ void	print_exp(t_env *exp)
 	}
 }
 
+int	__init_env(t_shell *shell, char **v_env)
+{
+	shell->str_env = v_env;
+	shell->env = __init_variables(shell->env, v_env);
+	if (!shell->env)
+		return (1);
+	return (0);
+}
+
 int	__init__(t_shell *shell, char **v_env)
 {
+	ft_get_shell(shell);
 	if (__init_useful(&shell->useful))
 		return (1);
-	shell->env = __init_env(shell->env, v_env);
-	if (!shell->env)
+	if (__init_env(shell, v_env))
 		return (1);
 	shell->export = __init_exp(shell->env);
 	if (!shell->export)
 		return (1);
-	print_exp(shell->export);
 	return (0);
 }
