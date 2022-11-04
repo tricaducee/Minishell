@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 16:12:21 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/21 23:30:09 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 11:30:37 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 
 void	handle_signaux(int sig)
 {
-	char	*tmp;
-	char	cwd[PATH_MAX];
-
-	if (!getcwd(cwd, sizeof(cwd)))
-	{
-		printf("%i", sig);
-		handle_error("Could not get the path");
-	}
-	change_color(1, PINK);
-	tmp = ft_strjoin(cwd, INPUTCLR);
-	printf("\n%s", tmp);
-	free(tmp);
+	(void)sig;
+	printf("\n%s", _static_prompt());
 }
