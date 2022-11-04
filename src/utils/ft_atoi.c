@@ -1,51 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 14:40:20 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 08:36:55 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/04 10:22:17 by tgoel             #+#    #+#             */
+/*   Updated: 2022/11/04 10:22:43 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/* FREE MEMO :
- *
- *	STRUCT USEFUL: OK
- *
- *	STRUCT SHELL: (nothing to free)
- *		line: 			OK	
- *  
-*/
-
-
-void	free_export(t_variables **vars)
+int	ft_atoi(const char *str)
 {
-	t_variables	*tmp;
+	int				pn;
+	unsigned int	nbr;
 
-	while (*vars)
-	{
-		tmp = *vars;
-		free((*vars)->name);
-		free((*vars)->value);
-		*vars = (*vars)->next;
-		free(tmp);
-	}
-}
-
-
-void	free_struct(t_shell *shell)
-{
-	if (shell)
-	{
-		if (shell->line)
-		{
-			free(shell->line);
-			shell->line = NULL;
-		}
-	}
-	free_export(&shell->export);
+	pn = 1;
+	nbr = 0;
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	if (*str == '-' || *str == '+')
+		if (*(str++) == '-')
+			pn *= -1;
+	while (*str >= '0' && *str <= '9')
+		nbr = nbr * 10 + (*(str++) - '0');
+	return ((int)nbr * pn);
 }

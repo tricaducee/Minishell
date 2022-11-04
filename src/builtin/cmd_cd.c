@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_access.c                                     :+:      :+:    :+:   */
+/*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 19:04:50 by tgoel             #+#    #+#             */
-/*   Updated: 2022/08/21 23:10:23 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/02 18:09:31 by lgenevey          #+#    #+#             */
+/*   Updated: 2022/11/04 08:55:41 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
+#include "../../printfd/HEADER/ft_printfd.h"
 
-char	**split_path(char *env_path)
+int	cmd_cd(char **opti)
 {
-	char **path_splitted;
-
-	path_splitted = ft_split(env_path, ':');
-	if (!path_splitted)
-		handle_error("Could not split the path");
-	return (path_splitted);
-}
-
-int	check_access(char **env_path)
-{
-
+	if (chdir(opti[1]) != 0)
+		ft_printfd(2, "cd: %s: %s\n", strerror(errno), opti[0]);
+	return (1);
 }

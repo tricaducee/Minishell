@@ -1,51 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   is_uppercase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 14:40:20 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 08:36:55 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/04 09:02:50 by tgoel             #+#    #+#             */
+/*   Updated: 2022/11/04 09:03:04 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/* FREE MEMO :
- *
- *	STRUCT USEFUL: OK
- *
- *	STRUCT SHELL: (nothing to free)
- *		line: 			OK	
- *  
-*/
-
-
-void	free_export(t_variables **vars)
+int	ft_is_uppercase(char *str)
 {
-	t_variables	*tmp;
-
-	while (*vars)
+	printf("dans ft_is_uppercase\n");
+	if (!str)
+		return (0);
+	while (*str)
 	{
-		tmp = *vars;
-		free((*vars)->name);
-		free((*vars)->value);
-		*vars = (*vars)->next;
-		free(tmp);
+		if (*str <= 'A' || *str >= 'Z')
+			return (0);
+		++str;
 	}
-}
-
-
-void	free_struct(t_shell *shell)
-{
-	if (shell)
-	{
-		if (shell->line)
-		{
-			free(shell->line);
-			shell->line = NULL;
-		}
-	}
-	free_export(&shell->export);
+	return (1);
 }

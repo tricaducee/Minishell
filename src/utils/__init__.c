@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:26:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 05:51:14 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 09:08:01 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ t_variables	*__init_variables(t_variables *node, char **v_env)
 		node = node->next;
 	}
 	return (ret);
-}
-
-static int	__init_useful(t_useful *useful)
-{
-	if (cmd_pwd(useful, 0))
-		return (1);
-	return (0);
 }
 
 void    sort_alpha(t_variables **exp, t_variables *new_node)
@@ -101,8 +94,6 @@ int	__init_env(t_shell *shell, char **v_env)
 int	__init__(t_shell *shell, char **v_env)
 {
 	ft_get_shell(shell);
-	if (__init_useful(&shell->useful))
-		return (1);
 	if (__init_env(shell, v_env))
 		return (1);
 	shell->export = __init_exp(shell->env);

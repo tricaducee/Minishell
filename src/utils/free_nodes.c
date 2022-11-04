@@ -1,51 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   free_nodes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 14:40:20 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 08:36:55 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/04 08:58:36 by tgoel             #+#    #+#             */
+/*   Updated: 2022/11/04 09:01:13 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/* FREE MEMO :
- *
- *	STRUCT USEFUL: OK
- *
- *	STRUCT SHELL: (nothing to free)
- *		line: 			OK	
- *  
-*/
-
-
-void	free_export(t_variables **vars)
+void	free_nodes(t_variables **list)
 {
 	t_variables	*tmp;
 
-	while (*vars)
+	while (*list)
 	{
-		tmp = *vars;
-		free((*vars)->name);
-		free((*vars)->value);
-		*vars = (*vars)->next;
+		tmp = *list;
+		*list = (*list)->next;
 		free(tmp);
 	}
 }
 
-
-void	free_struct(t_shell *shell)
+void	free_nodes_contents(t_variables **list)
 {
-	if (shell)
+	t_variables	*tmp;
+
+	while (*list)
 	{
-		if (shell->line)
-		{
-			free(shell->line);
-			shell->line = NULL;
-		}
+		if ((*list)->name)
+			free((*list)->name);
+		if ((*list)->value)
+			free((*list)->value);
+		tmp = *list;
+		*list = (*list)->next;
+		free(tmp);
 	}
-	free_export(&shell->export);
 }

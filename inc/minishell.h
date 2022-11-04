@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:35:21 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 10:22:43 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,33 @@
 # include "colorminishell.h"
 # include "minishellstruct.h"
 
+int	g_errno;
 
 /*  ----------------- MAIN ------------------ */
-void		handle_signaux(int sig);
+void	handle_signaux(int sig);
+
 
 /* ----------------- __INIT__ --------------- */
-int			__init__(t_shell *shell, char **v_env);
+int		__init__(t_shell *shell, char **v_env);
+
 
 /* ----------------- BUILT IN --------------- */
-int			cmd_echo(int n, char *display);
-int			cmd_env(char **env);
-int			cmd_unset(char *unsetted);
-int			cmd_export(char *exported);
-int			cmd_pwd(t_useful *useful, int display);
-int			cmd_cd(t_useful *useful, char *path);
+void	cmd_echo(char **ss);
+int		cmd_env(t_shell *shell);
+void	cmd_unset(t_shell *shell, char **args);
+int		cmd_export(t_shell *shell, t_cmdli *cmdli);
+int		cmd_pwd(void);
+int		cmd_cd(char **opti);
+int		cmd_exit(t_shell *shell, t_cmdli **cmdli);
+
+
+/* ------------------ FREE ------------------- */
+void	handle_error(char *str);
+void	free_struct(t_shell *shell);
+char	**free_tab_null(char **ss);
+void	free_nodes(t_variables **list);
+void	free_nodes_contents(t_variables **list);
+
 
 /* ------------------ UTILS ------------------ */
 char		*ft_strdup(char *str);
@@ -55,28 +68,50 @@ char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strjoin2(char *s1, char *s2);
 void		change_color(int fd, char *color);
 char		**ft_split(char *s, char c);
-t_variables	*create_parsed_node(char *str);
-int			modify_node(t_variables *node, char *str);
 int			ft_strcmp(char *s1, char *s2);
-t_variables	*create_node_name_value(char *name, char *value);
 char		**ft_strsjoin(char *s, char **ss);
 int			ft_strslen(char **s);
 int			ft_strcmp_int(char *s1, char *s2);
 char		*ft_itoa(int n);
 char		*ft_substr(char *s, unsigned int start, unsigned int len);
+int			ft_strinset(char *str, char *set);
+int			ft_is_uppercase(char *str);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_atoi(const char *str);
+
+
+/* ----------------- NODES ------------------- */
+
+t_variables	*create_parsed_node(char *str);
+t_variables	*create_node_name_value(char *name, char *value);
+int			modify_node(t_variables *node, char *str);
 
 
 /* ------------------- GET ------------------- */
-char	*ft_get_var(char *substr);
-char	**ft_get_str_env(void);
-t_shell	*ft_get_shell(t_shell *new_shell);
+char		*ft_get_var(char *substr);
+char		**ft_get_str_env(void);
+t_shell		*ft_get_shell(t_shell *new_shell);
 t_variables	*ft_get_export(void);
 t_variables	*ft_get_env(void);
 
 
-/* ------------------ FREE ------------------- */
-void		handle_error(char *str);
-void		free_struct(t_shell *shell);
+/* ------------------ EXEC -------------------- */
+int				close_pipe(int *pipe);
+void			set_file_in(t_cmdli *cmdli);
+void			set_file_out(t_cmdli *cmdli);
+void			set_in(t_cmdli *cmdli);
+void			set_out(t_cmdli *cmdli);
+void			set_redirection(t_cmdli *cmdli);
+int				run_builtin(char *str, t_cmdli *cmd, t_shell *shell);
+int				is_builtin(t_cmdli *cmd, t_shell *shell);
+unsigned int	path_counter(char *path);
+char			*path_join(char *path, char *cmd,
+				unsigned int path_len, unsigned int cmd_len);
+char			**split_path(char *path, char *cmd, unsigned int cmd_len);
+char			*get_absolute_path(char *cmd);
+int				close_pipe(int *pipe);
+int				exec_cmd(t_cmdli *cmdli, t_shell *shell);
+
 
 /* ----------------- PARSING -------------------*/
 void	add_andor(t_cmdli **cmds_list, t_type *type, int and_or);
@@ -117,6 +152,5 @@ char	*split_cmd_sp_ret(char	**cmdline, char *ret,
 char	*split_cmd(char *(*cmdline), unsigned int *i, char c);
 void	type_and_set(char *s, t_cmdli **cmds_list, t_type *type, int interpret);
 void	interpret_func(char *s, t_cmdli **cmds_list, t_type *type, int rd);
-
 
 #endif

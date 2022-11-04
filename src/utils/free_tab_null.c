@@ -1,51 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   free_tab_null.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 14:40:20 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 08:36:55 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/04 08:43:07 by tgoel             #+#    #+#             */
+/*   Updated: 2022/11/04 08:44:50 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/* FREE MEMO :
- *
- *	STRUCT USEFUL: OK
- *
- *	STRUCT SHELL: (nothing to free)
- *		line: 			OK	
- *  
-*/
-
-
-void	free_export(t_variables **vars)
+char	**free_tab_null(char **ss)
 {
-	t_variables	*tmp;
+	unsigned int	i;
 
-	while (*vars)
-	{
-		tmp = *vars;
-		free((*vars)->name);
-		free((*vars)->value);
-		*vars = (*vars)->next;
-		free(tmp);
-	}
-}
-
-
-void	free_struct(t_shell *shell)
-{
-	if (shell)
-	{
-		if (shell->line)
-		{
-			free(shell->line);
-			shell->line = NULL;
-		}
-	}
-	free_export(&shell->export);
+	i = 0;
+	if (!ss)
+		return (NULL);
+	while (ss[i])
+		free(ss[i++]);
+	free(ss);
+	return (NULL);
 }

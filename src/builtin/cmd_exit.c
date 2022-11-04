@@ -1,51 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 14:40:20 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 08:36:55 by tgoel            ###   ########.fr       */
+/*   Created: 2022/10/13 18:25:57 by lgenevey          #+#    #+#             */
+/*   Updated: 2022/11/04 10:25:50 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/* FREE MEMO :
- *
- *	STRUCT USEFUL: OK
- *
- *	STRUCT SHELL: (nothing to free)
- *		line: 			OK	
- *  
-*/
-
-
-void	free_export(t_variables **vars)
+int	cmd_exit(t_shell *shell, t_cmdli **cmdli)
 {
-	t_variables	*tmp;
+	int	error;
 
-	while (*vars)
-	{
-		tmp = *vars;
-		free((*vars)->name);
-		free((*vars)->value);
-		*vars = (*vars)->next;
-		free(tmp);
-	}
-}
-
-
-void	free_struct(t_shell *shell)
-{
-	if (shell)
-	{
-		if (shell->line)
-		{
-			free(shell->line);
-			shell->line = NULL;
-		}
-	}
-	free_export(&shell->export);
+	if ((*cmdli)->cmd_args[1])
+		error = ft_atoi((*cmdli)->cmd_args[1]);
+	else
+		error = 0;
+	free_nodes_contents(&shell->export);
+	free_nodes(&shell->env);
+	free_cmdli(cmdli);
+	exit(error);
 }

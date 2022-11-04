@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:47:16 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:35:31 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 09:17:00 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "minishell.h"
 
-int	g_errno;
 
 typedef enum E_type
 {
@@ -67,7 +66,6 @@ typedef struct S_shell
 {
 	char		**str_env;
 	char		*line;
-	t_cmdli		cmdli;
 	t_useful	useful;
 	t_variables	*env;
 	t_variables	*export;

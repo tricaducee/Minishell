@@ -1,51 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   ft_strinset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 14:40:20 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 08:36:55 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/04 08:56:21 by tgoel             #+#    #+#             */
+/*   Updated: 2022/11/04 08:56:36 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/* FREE MEMO :
- *
- *	STRUCT USEFUL: OK
- *
- *	STRUCT SHELL: (nothing to free)
- *		line: 			OK	
- *  
-*/
-
-
-void	free_export(t_variables **vars)
+int	ft_strinset(char *str, char *set)
 {
-	t_variables	*tmp;
+	unsigned int	i;
 
-	while (*vars)
+	while (*str)
 	{
-		tmp = *vars;
-		free((*vars)->name);
-		free((*vars)->value);
-		*vars = (*vars)->next;
-		free(tmp);
+		i = 0;
+		while (set[i] && set[i] != *str)
+			i++;
+		if (!set[i])
+			return (1);
+		str++;
 	}
-}
-
-
-void	free_struct(t_shell *shell)
-{
-	if (shell)
-	{
-		if (shell->line)
-		{
-			free(shell->line);
-			shell->line = NULL;
-		}
-	}
-	free_export(&shell->export);
+	return (0);
 }
