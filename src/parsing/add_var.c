@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 07:00:06 by hrolle            #+#    #+#             */
-/*   Updated: 2022/11/04 10:19:28 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 11:15:34 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*add_var_free(char *str, char *new)
 			free(tmp);
 		return (NULL);
 	}
-	ret = ft_strjoin2(str, new);
+	ret = ft_strjoin(str, new);
 	free(new);
 	if (tmp)
 		free(tmp);

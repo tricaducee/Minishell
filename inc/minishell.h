@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 11:11:51 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 11:16:53 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	free_tab(char **ss);
 char		*ft_strdup(char *str);
 int			ft_strlen(char *str);
 char		*ft_strjoin(char *s1, char *s2);
-char		*ft_strjoin2(char *s1, char *s2);
 void		change_color(int fd, char *color);
 char		**ft_split(char *s, char c);
 int			ft_strcmp(char *s1, char *s2);
@@ -114,7 +113,7 @@ char			*path_join(char *path, char *cmd,
 char			**split_path(char *path, char *cmd, unsigned int cmd_len);
 char			*get_absolute_path(char *cmd);
 int				close_pipe(int *pipe);
-int				exec_cmd(t_cmdli *cmdli, t_shell *shell);
+int				exec_cmd(t_cmdli *cmdli);
 
 
 /* ----------------- PARSING -------------------*/

@@ -6,13 +6,13 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:08:47 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 07:31:18 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 11:17:45 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin2(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -36,7 +36,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (new_str);
 }
 
-char	*ft_strjoin2(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
     char    *str;
     char    *ret;
