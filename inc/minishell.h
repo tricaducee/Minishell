@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 10:22:43 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/04 11:11:51 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ void	free_struct(t_shell *shell);
 char	**free_tab_null(char **ss);
 void	free_nodes(t_variables **list);
 void	free_nodes_contents(t_variables **list);
+void	free_cmdli(t_cmdli **cmdli);
+void	free_content(t_cmdli *cmdli);
+void	free_tab(char **ss);
 
 
 /* ------------------ UTILS ------------------ */
@@ -78,6 +81,7 @@ int			ft_strinset(char *str, char *set);
 int			ft_is_uppercase(char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_atoi(const char *str);
+char		*_static_prompt(void);
 
 
 /* ----------------- NODES ------------------- */
@@ -133,9 +137,6 @@ t_cmdli	*create_cmdli(void);
 void	error_cmdli_interpret(t_cmdli **cmds_list, char *s);
 void	error_cmdli(t_cmdli **cmds_list, char *s);
 t_cmdli	*error_cmdli_nl(t_cmdli **cmds_list);
-void	free_cmdli(t_cmdli **cmdli);
-void	free_content(t_cmdli *cmdli);
-void	free_tab(char **ss);
 t_cmdli	*get_cmds(char **cmdline);
 void	interpret(t_cmdli **cmds_list, char **cmdline,
 					t_type *type, unsigned int *i);
