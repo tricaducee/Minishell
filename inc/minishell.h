@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 11:16:53 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/05 07:06:52 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int			ft_is_uppercase(char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_atoi(const char *str);
 char		*_static_prompt(void);
+char	*get_branch_name(char *str);
 
 
 /* ----------------- NODES ------------------- */

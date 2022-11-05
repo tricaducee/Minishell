@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:32:46 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/05 06:32:21 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/05 07:11:42 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		is_in_git(char *current_dir, char *dir_to_check)
 	free(git_dir);
 	if (!dir_return)
 	{
+		// in a git directory
 		free(dir_return);
 		return (0);
 	}
@@ -62,15 +63,38 @@ int		is_in_git(char *current_dir, char *dir_to_check)
 	return (1);
 }
 
+char	*read_head_git(char *path)
+{
+	char	*git_dir;
+	char	buf[2048];
+	int		fd;
+
+	git_dir = prompt_join(path, "/", ".git/HEAD");
+	fd = open(git_dir, O_RDONLY);
+	read(fd, buf, 2048);
+	free(git_dir);
+	close(fd);
+	return (get_branch_name(buf));
+}
+
 char	*_static_prompt(void)
 {
 	static	char *full_prompt;
 	char	tmp[PATH_MAX];
+	char	*git_name;
+	char	*tmp2;
+
 
 	if (full_prompt)
 		free(full_prompt);
 	if (is_in_git(getcwd(tmp, PATH_MAX), ".git"))
-		full_prompt =  prompt_join("\033[32;1mMinishell\033[0m 🍋 \033[33;3m", getcwd(tmp, PATH_MAX), "\t\t\tGIT DETECTED\n\033[0m🔥 ➤ ");
+	{
+		git_name = prompt_join("\033[32;1mMinishell\033[0m 🍋 \033[33;3m", getcwd(tmp, PATH_MAX), "\t\t\t");
+		tmp2 = read_head_git(getcwd(tmp, PATH_MAX));
+		full_prompt =  prompt_join(git_name, tmp2, "\n\033[0m🔥 ➤ ");
+		free(git_name);
+		free(tmp2);
+	}
 	else
 		full_prompt =  prompt_join("\033[32;1mMinishell\033[0m 🍋 \033[33;3m", getcwd(tmp, PATH_MAX), "\n\033[0m🔥 ➤ ");
 	return (full_prompt);
