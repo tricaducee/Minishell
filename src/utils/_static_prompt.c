@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:32:46 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/05 07:33:55 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/05 07:58:44 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		is_in_git(char *current_dir, char *dir_to_check)
 	free(git_dir);
 	if (!dir_return)
 	{
-		// in a git directory
 		free(dir_return);
 		return (0);
 	}

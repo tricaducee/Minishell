@@ -10,7 +10,8 @@ OBD		= ./objs/
 MAINS	= main.c signaux.c
 BUILS	= cmd_env.c cmd_cd.c cmd_echo.c cmd_exit.c cmd_pwd.c cmd_unset.c cmd_export.c
 UTILS	= __init__.c ft_strlen.c ft_strdup.c ft_strjoin.c free_struct.c change_color.c ft_split.c handle_error.c ft_strcmp.c ft_get_env.c ft_get_export.c ft_get_shell.c \
-		  ft_get_str_env.c ft_get_var.c ft_itoa.c ft_substr.c free_tab_null.c free_nodes.c ft_strinset.c ft_strncmp.c is_uppercase.c ft_atoi.c _static_prompt.c get_branch_name.c
+		  ft_get_str_env.c ft_get_var.c ft_itoa.c ft_substr.c free_tab_null.c free_nodes.c ft_strinset.c ft_strncmp.c is_uppercase.c ft_atoi.c _static_prompt.c get_branch_name.c \
+		  get_all_files.c
 
 PARSS	= add_andor.c add_cmd.c add_file.c add_quote.c cmdli_first.c create_cmdli.c free_cmdli.c get_cmds.c p_env.c print_tab.c type_and_set.c \
 		  add_arg.c add_dquote.c add_pipe.c add_var.c cmdli_utils.c error_cmdli.c free_tab.c heredoc.c print_cmdli.c  split_cmd.c
