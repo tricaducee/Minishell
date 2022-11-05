@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:32:46 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/05 07:11:42 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/05 07:33:55 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,20 @@ char	*_static_prompt(void)
 	static	char *full_prompt;
 	char	tmp[PATH_MAX];
 	char	*git_name;
-	char	*tmp2;
+	char	*tmp2[2];
 
 
 	if (full_prompt)
 		free(full_prompt);
 	if (is_in_git(getcwd(tmp, PATH_MAX), ".git"))
 	{
-		git_name = prompt_join("\033[32;1mMinishell\033[0m 🍋 \033[33;3m", getcwd(tmp, PATH_MAX), "\t\t\t");
-		tmp2 = read_head_git(getcwd(tmp, PATH_MAX));
-		full_prompt =  prompt_join(git_name, tmp2, "\n\033[0m🔥 ➤ ");
+		git_name = prompt_join("\033[32;1mMinishell\033[0m 🍋 \033[33;3m", getcwd(tmp, PATH_MAX), "\t");
+		tmp2[0] = read_head_git(getcwd(tmp, PATH_MAX));
+		tmp2[1] = prompt_join(git_name, "\033[0;34mOn ", tmp2[0]);
+		full_prompt =  ft_strjoin(tmp2[1], "\033[0m🔥 ➤ ");
 		free(git_name);
-		free(tmp2);
+		free(tmp2[0]);
+		free(tmp2[1]);
 	}
 	else
 		full_prompt =  prompt_join("\033[32;1mMinishell\033[0m 🍋 \033[33;3m", getcwd(tmp, PATH_MAX), "\n\033[0m🔥 ➤ ");
