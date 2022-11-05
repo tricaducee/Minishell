@@ -3,6 +3,7 @@ minishell
 Minishell
 a.out
 .DS_Store
+test.txt
 
 # Prerequisites
 *.d

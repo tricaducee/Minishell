@@ -5,6 +5,8 @@ PARSD	= ./src/parsing
 PRINTD	= ./printfd
 EXECD	= $(MAIND)/execution
 
+OBD		= ./objs/
+
 MAINS	= main.c signaux.c
 BUILS	= cmd_env.c cmd_cd.c cmd_echo.c cmd_exit.c cmd_pwd.c cmd_unset.c cmd_export.c
 UTILS	= __init__.c ft_strlen.c ft_strdup.c ft_strjoin.c free_struct.c change_color.c ft_split.c handle_error.c ft_strcmp.c ft_get_env.c ft_get_export.c ft_get_shell.c \
@@ -31,10 +33,10 @@ ifeq ($(DEBUG), debug)
 endif
 CC		= cc $(FLAGS)
 
-MAINO	= $(addprefix $(MAIND)/,$(MAINS))
-UTILO	= $(addprefix $(UTILD)/,$(UTILS))
 BUILO	= $(addprefix $(BUILD)/,$(BUILS))
+MAINO	= $(addprefix $(MAIND)/,$(MAINS))
 PARSO	= $(addprefix $(PARSD)/,$(PARSS))
+UTILO	= $(addprefix $(UTILD)/,$(UTILS))
 PRINTO	= $(addprefix $(PRINTD)/,$(PRINTS))
 EXECO	= $(addprefix $(EXECD)/, $(EXECS))
 
@@ -44,14 +46,14 @@ OBJS	= $(FILES:.c=.o)
 
 all: $(NAME)
 
+%.o: %.c
+	@printf "Compiling %-43s \r" $<
+	@$(CC) -c $< -o $@
+
 $(NAME) : $(OBJS)
 	@printf "\nCompiling executable \n"
 	@$(CC) $(OBJS) -o $(NAME) $(READLINE) 
 	@printf "Done\n"
-
-%.o: %.c
-	@printf "Compiling %-43.333s \r" $<
-	@$(CC) -c $< -o $@
 
 clean:
 	@printf "Cleaning .o\n"
