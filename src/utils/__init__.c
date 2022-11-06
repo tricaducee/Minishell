@@ -6,11 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:26:32 by tgoel             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/11/04 09:08:01 by tgoel            ###   ########.fr       */
-=======
-/*   Updated: 2022/10/16 18:31:53 by tgoel            ###   ########.fr       */
->>>>>>> 2310487be8a7bef53ada2d6a462e8fd520035856
+/*   Updated: 2022/11/06 14:50:44 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +93,11 @@ int	__init_env(t_shell *shell, char **v_env)
 
 int	__init__(t_shell *shell, char **v_env)
 {
-<<<<<<< HEAD
 	ft_get_shell(shell);
 	if (__init_env(shell, v_env))
 		return (1);
 	shell->export = __init_exp(shell->env);
 	if (!shell->export)
-=======
-	if (__init_useful(&shell->useful))
->>>>>>> 2310487be8a7bef53ada2d6a462e8fd520035856
 		return (1);
 	return (0);
 }

@@ -72,10 +72,6 @@ build:
 prune:
 	docker system prune -a --volumes
 
-<<<<<<< HEAD
 re: fclean all
 
 .PHONY: re fclean clean all build prune
-=======
-.PHONY: re fclean clean all build 
->>>>>>> 2310487be8a7bef53ada2d6a462e8fd520035856
