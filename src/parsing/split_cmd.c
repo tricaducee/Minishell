@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 06:43:55 by hrolle            #+#    #+#             */
-/*   Updated: 2022/11/04 11:17:35 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 15:09:57 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ char	*split_cmd_sp_add_func(char **cmdline, char *ret, unsigned int *i)
 {
 	if ((*cmdline)[*i] && (*cmdline)[*i] == '$')
 		return (add_var(cmdline, ret, i));
+	//else if ((*cmdline)[*i] && (*cmdline)[*i] == '*')//------------------------------------
+	//	return (add_wildcard(cmdline, ret, i));
 	else if ((*cmdline)[*i] && (*cmdline)[*i] == '\'')
 		return (add_quote(cmdline, ret, i));
 	else if ((*cmdline)[*i] && (*cmdline)[*i] == '"')
@@ -72,7 +74,7 @@ char	*split_cmd_sp(char **cmdline, unsigned int *i)
 			&& (*cmdline)[*i + j] != ' ' && (*cmdline)[*i + j]
 			!= '<' && (*cmdline)[*i + j] != '>' && (*cmdline)[*i + j]
 			!= '|' && (*cmdline)[*i + j] != '&' && (*cmdline)[*i + j]
-			!= '\'' && (*cmdline)[*i + j] != '"')
+			!= '\'' && (*cmdline)[*i + j] != '"' && (*cmdline)[*i + j] != '*')
 			++j;
 		if (j)
 			ret = split_cmd_sp_ret(cmdline, ret, i, j);

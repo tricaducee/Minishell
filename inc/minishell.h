@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/06 14:22:34 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 15:05:13 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ int	g_errno;
 /*  ----------------- MAIN ------------------ */
 void	handle_signaux(int sig);
 
-
 /* ----------------- __INIT__ --------------- */
 int		__init__(t_shell *shell, char **v_env);
-
 
 /* ----------------- BUILT IN --------------- */
 void	cmd_echo(char **ss);
@@ -52,7 +50,6 @@ int		cmd_pwd(void);
 int		cmd_cd(t_cmdli *cmdli);
 int		cmd_exit(t_shell *shell, t_cmdli **cmdli);
 
-
 /* ------------------ FREE ------------------- */
 void	handle_error(char *str);
 void	free_struct(t_shell *shell);
@@ -62,7 +59,6 @@ void	free_nodes_contents(t_variables **list);
 void	free_cmdli(t_cmdli **cmdli);
 void	free_content(t_cmdli *cmdli);
 void	free_tab(char **ss);
-
 
 /* ------------------ UTILS ------------------ */
 char		*ft_strdup(char *str);
@@ -88,17 +84,17 @@ char		*send_one_file(void);
 
 /* ----------------- NODES ------------------- */
 
-t_variables	*create_parsed_node(char *str);
-t_variables	*create_node_name_value(char *name, char *value);
-int			modify_node(t_variables *node, char *str);
+t_variables		*create_parsed_node(char *str);
+t_variables		*create_node_name_value(char *name, char *value);
+int				modify_node(t_variables *node, char *str);
 
 
 /* ------------------- GET ------------------- */
-char		*ft_get_var(char *substr);
-char		**ft_get_str_env(void);
-t_shell		*ft_get_shell(t_shell *new_shell);
-t_variables	*ft_get_export(void);
-t_variables	*ft_get_env(void);
+char			*ft_get_var(char *substr);
+char			**ft_get_str_env(void);
+t_shell			*ft_get_shell(t_shell *new_shell);
+t_variables		*ft_get_export(void);
+t_variables		*ft_get_env(void);
 
 
 /* ------------------ EXEC -------------------- */

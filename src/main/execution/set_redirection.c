@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 03:10:11 by hrolle            #+#    #+#             */
-/*   Updated: 2022/11/06 13:58:19 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 15:01:46 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	set_file_in(t_cmdli *cmdli)
 		if (cmdli->fd_in == -1)
 		{
 			g_errno = errno;
-			ft_printfd(2, "#+wminishell#0:#/r %s#0", strerror(g_errno));
-			exit(g_errno);
+			ft_printfd(2, "#+wminishell#0: %s:#/r %s#0\n",
+				cmdli->file_in[i - 1], strerror(g_errno));
 		}
 	}
 }
@@ -50,8 +50,8 @@ void	set_file_out(t_cmdli *cmdli)
 		if (cmdli->fd_out == -1)
 		{
 			g_errno = errno;
-			ft_printfd(2, "#+wminishell#0:#/r %s#0", strerror(g_errno));
-			exit(g_errno);
+			ft_printfd(2, "#+wminishell#0: %s:#/r %s#0\n",
+				cmdli->file_out[i - 1], strerror(g_errno));
 		}
 	}
 }

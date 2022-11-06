@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 19:15:50 by hrolle            #+#    #+#             */
-/*   Updated: 2022/11/06 14:54:18 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 15:00:36 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 #include "../../../printfd/HEADER/ft_printfd.h"
 
-int	close_pipe(int    *pipe)
+int	close_pipe(int	*pipe)
 {
 	if (pipe)
 	{
@@ -23,7 +23,7 @@ int	close_pipe(int    *pipe)
 	return (0);
 }
 
-int	close_and_free(t_cmdli    *cmdli)
+int	close_and_free(t_cmdli	*cmdli)
 {
 	if (cmdli->pipe_in)
 	{
@@ -35,6 +35,16 @@ int	close_and_free(t_cmdli    *cmdli)
 		free(cmdli->cmd);
 		cmdli->cmd = NULL;
 	}
+	if (cmdli->file_in)
+	{
+		free_tab(cmdli->file_in);
+		cmdli->file_in = NULL;
+	}
+	if (cmdli->file_out)
+	{
+		free_tab(cmdli->file_out);
+		cmdli->file_out = NULL;
+	}
 	return (0);
 }
 
@@ -42,7 +52,8 @@ int	exec_cmd(t_cmdli *cmdli)
 {
 	if (is_builtin_no_run(cmdli))
 		return (set_buildin_redirect(cmdli));
-	if (!((cmdli->cmd = get_absolute_path(cmdli->cmd))))
+	cmdli->cmd = get_absolute_path(cmdli->cmd);
+	if (!cmdli->cmd)
 		return (1);
 	cmdli->pid = fork();
 	if (cmdli->pid == -1)
@@ -57,7 +68,8 @@ int	exec_cmd(t_cmdli *cmdli)
 		if (execve(cmdli->cmd, cmdli->cmd_args, ft_get_str_env()) == -1)
 		{
 			g_errno = errno;
-			ft_printfd(2, "#+wminishell#0: #/r%s#0\n", strerror(g_errno));
+			ft_printfd(2, "#+wminishell#0: %s: #/r%s#0\n",
+				cmdli->cmd_args[0], strerror(g_errno));
 			exit(g_errno);
 		}
 		exit(0);

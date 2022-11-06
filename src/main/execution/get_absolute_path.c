@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   get_absolute_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 03:12:23 by hrolle            #+#    #+#             */
-/*   Updated: 2022/11/04 11:10:27 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 15:01:19 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 #include "../../../printfd/HEADER/ft_printfd.h"
+
+char	**free_path(char **tab, char *path)
+{
+	if (tab)
+		free_tab(tab);
+	if (path)
+		free(path);
+	return (NULL);
+}
 
 unsigned int	path_counter(char *path)
 {
@@ -49,25 +58,28 @@ char	*path_join(char *path, char *cmd,
 char	**split_path(char *path, char *cmd, unsigned int cmd_len)
 {
 	char			**ret;
+	char			*path_i;
 	unsigned int	i;
 	unsigned int	j;
 
+	path_i = path;
 	ret = malloc((path_counter(path) + 1) * sizeof(char *));
 	if (!ret)
 		return (NULL);
 	j = 0;
-	while (*path)
+	while (*path_i)
 	{
-		while (*path == ':')
-			path++;
+		while (*path_i == ':')
+			path_i++;
 		i = 0;
-		while (path[i] && path[i] != ':')
+		while (path_i[i] && path_i[i] != ':')
 			i++;
-		ret[j] = path_join(path, cmd, i, cmd_len);
+		ret[j] = path_join(path_i, cmd, i, cmd_len);
 		if (!ret[j++])
-			return (free_tab_null(ret));
-		path += i;
+			return (free_path(ret, path));
+		path_i += i;
 	}
+	free_path(NULL, path);
 	ret[j] = NULL;
 	return (ret);
 }
@@ -88,8 +100,9 @@ char	*get_absolute_path(char *cmd)
 		i++;
 	if (!path_tab[i])
 	{
+		free_tab(path_tab);
 		g_errno = errno;
-		ft_printfd(2, "#+wminishell#0: #/r%s#0\n", strerror(g_errno));
+		ft_printfd(2, "#+wminishell#0: %s: #/r%s#0\n", cmd, strerror(g_errno));
 		return (NULL);
 	}
 	ret = ft_strdup(path_tab[i]);
