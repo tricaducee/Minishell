@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/05 08:31:05 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 14:22:34 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		cmd_env(t_shell *shell);
 void	cmd_unset(t_shell *shell, char **args);
 int		cmd_export(t_shell *shell, t_cmdli *cmdli);
 int		cmd_pwd(void);
-int		cmd_cd(char **opti);
+int		cmd_cd(t_cmdli *cmdli);
 int		cmd_exit(t_shell *shell, t_cmdli **cmdli);
 
 
@@ -83,9 +83,7 @@ int			ft_atoi(const char *str);
 char		*_static_prompt(void);
 char		*get_branch_name(char *str);
 char		**dir_name(void);
-char		*send_one_file();
-
-
+char		*send_one_file(void);
 
 
 /* ----------------- NODES ------------------- */
@@ -112,6 +110,7 @@ void			set_out(t_cmdli *cmdli);
 void			set_redirection(t_cmdli *cmdli);
 int				run_builtin(char *str, t_cmdli *cmd, t_shell *shell);
 int				is_builtin(t_cmdli *cmd, t_shell *shell);
+int				is_builtin_no_run(t_cmdli *cmd);
 unsigned int	path_counter(char *path);
 char			*path_join(char *path, char *cmd,
 				unsigned int path_len, unsigned int cmd_len);
@@ -119,6 +118,7 @@ char			**split_path(char *path, char *cmd, unsigned int cmd_len);
 char			*get_absolute_path(char *cmd);
 int				close_pipe(int *pipe);
 int				exec_cmd(t_cmdli *cmdli);
+int				set_buildin_redirect(t_cmdli *cmdli);
 
 
 /* ----------------- PARSING -------------------*/

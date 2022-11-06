@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/05 08:40:17 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 14:40:07 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	while_loop(t_shell *shell)
 				;
 			free(read);
 		}
-		printf("\n");
+		write(1, "\n", 1);
 	}
 	return (0);
 }
@@ -74,22 +74,12 @@ int	while_loop(t_shell *shell)
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
-	char	*d;
-	int		i;
 
 	if (!argc || argv)
 		write(1, "", 1);
 	if (__init__(&shell, env))
 		return (1);
-	i = 0;
-	while (i < 24)
-	{
-		d = send_one_file();
-		printf("%s\n", d);
-		free(d);
-		i++;
-	}
-	//while_loop(&shell);
-	//free_struct(&shell);
+	while_loop(&shell);
+	free_struct(&shell);
 	exit(0);
 }

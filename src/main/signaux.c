@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 16:12:21 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/04 11:30:37 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 14:40:04 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	handle_signaux(int sig)
 {
 	(void)sig;
-	printf("\n%s", _static_prompt());
+	printf("\n\n%s", _static_prompt());
 }

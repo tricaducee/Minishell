@@ -6,42 +6,42 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 19:15:50 by hrolle            #+#    #+#             */
-/*   Updated: 2022/11/05 06:41:18 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 14:30:56 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 #include "../../../printfd/HEADER/ft_printfd.h"
 
-int    close_pipe(int    *pipe)
+int	close_pipe(int    *pipe)
 {
-    if (pipe)
-    {
-        close(pipe[0]);
-        close(pipe[1]);
-    }
-    return (0);
+	if (pipe)
+	{
+		close(pipe[0]);
+		close(pipe[1]);
+	}
+	return (0);
 }
 
-int    close_and_free(t_cmdli    *cmdli)
+int	close_and_free(t_cmdli    *cmdli)
 {
-    if (cmdli->pipe_in)
-    {
-        close(cmdli->pipe_in[0]);
-        close(cmdli->pipe_in[1]);
-    }
-    if (cmdli->cmd)
-    {
-        free(cmdli->cmd);
-        cmdli->cmd = NULL;
-    }
-    return (0);
+	if (cmdli->pipe_in)
+	{
+		close(cmdli->pipe_in[0]);
+		close(cmdli->pipe_in[1]);
+	}
+	if (cmdli->cmd)
+	{
+		free(cmdli->cmd);
+		cmdli->cmd = NULL;
+	}
+	return (0);
 }
 
-int    exec_cmd(t_cmdli *cmdli)
+int	exec_cmd(t_cmdli *cmdli)
 {
-	if (is_builtin(cmdli, ft_get_shell(NULL)))
-		return (0);
+	if (is_builtin_no_run(cmdli))
+		return (set_buildin_redirect(cmdli));
 	if (!((cmdli->cmd = get_absolute_path(cmdli->cmd))))
 		return (1);
 	cmdli->pid = fork();

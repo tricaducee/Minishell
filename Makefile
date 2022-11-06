@@ -21,7 +21,7 @@ PRINTS = counters/ft_strlen2.c main/flags_check_fd.c print_functions/print_len_f
 		utils/ft_putchar_fd.c utils/ft_strchr.c counters/nbrlen.c print_functions/print_c_fd.c print_functions/print_s_fd.c text_mod/bright_fd.c \
 		utils/ft_putnbr_fd.c counters/u_nbrlen_base.c print_functions/print_d_fd.c print_functions/print_u_fd.c text_mod/flags_text_fd.c \
 		utils/ft_putnbrb_fd.c
-EXECS	= exec_cmd.c get_absolute_path.c is_builtin.c set_redirection.c
+EXECS	= exec_cmd.c get_absolute_path.c is_builtin.c set_redirection.c build_in_exec.c
 
 NAME	= minishell
 

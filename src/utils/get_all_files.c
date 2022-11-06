@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 07:46:33 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/05 08:53:08 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/06 13:19:48 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	type: 8 = fichier / 4 = dossier
 
 	dirp->d_name:
-	name of the
+	name of the file/directory
 */
 char	**dir_name(void)
 {
