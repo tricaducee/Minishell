@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:32:46 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/20 12:21:09 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/20 13:14:18 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,10 @@ char	*read_head_git(char *path)
 
 char	*_static_prompt(void)
 {
-	static	char *full_prompt;
-	char	tmp[PATH_MAX];
-	char	*git_name;
-	char	*tmp2[2];
-
+	static char		*full_prompt;
+	char			tmp[PATH_MAX];
+	char			*git_name;
+	char			*tmp2[2];
 
 	if (full_prompt)
 		free(full_prompt);
