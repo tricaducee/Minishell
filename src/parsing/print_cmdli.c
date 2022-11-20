@@ -6,11 +6,11 @@
 // /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 // /*                                                +#+#+#+#+#+   +#+           */
 // /*   Created: 2022/10/26 06:53:43 by hrolle            #+#    #+#             */
-// /*   Updated: 2022/11/12 15:44:35 by hrolle           ###   ########.fr       */
+// /*   Updated: 2022/11/17 20:33:40 by hrolle           ###   ########.fr       */
 // /*                                                                            */
 // /* ************************************************************************** */
 
-// #include "../../inc/minishell.h"
+// #include "../../incs/minishell.h"
 
 // void	print_cmdli_tab(char **ss, char *s)
 // {

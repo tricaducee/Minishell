@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 06:39:06 by hrolle            #+#    #+#             */
-/*   Updated: 2022/11/20 13:12:58 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/20 14:03:03 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_cmdli(t_cmdli **cmdli)
 {
 	t_cmdli	*tmp;
 
-	if (!cmdli || !*cmdli)
+	if (!cmdli)
 		return ;
 	*cmdli = cmdli_first(*cmdli);
 	while (*cmdli)

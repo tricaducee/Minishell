@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/20 13:08:49 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/20 13:51:41 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,21 @@ int	while_loop(t_shell *shell)
 	t_cmdli	*cmdli_i;
 
 	(void)shell;
+	sig_handler(shell);
 	while (1)
 	{
-		sig_handler(shell);
-		read = readline("");
+		read = readline(_static_prompt());
 		if (read)
 		{
-			add_history(read);
-			read_history(read);
+			if (*read)
+				add_history(read);
 			cmdli = get_cmds(&read);
 			if (cmdli)
 			{
 				cmdli_i = cmdli;
 				while (cmdli_i)
 				{
+					shell->if_sig = 0;
 					exec_cmd(cmdli_i);
 					cmdli_i = cmdli_i->next;
 				}
@@ -64,7 +65,11 @@ int	while_loop(t_shell *shell)
 			while (wait(NULL) != -1)
 				;
 			free(read);
+			printf("\n");
+			shell->if_sig = 1;
 		}
+		else
+			exit(0);
 	}
 	return (0);
 }

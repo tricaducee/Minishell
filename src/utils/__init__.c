@@ -6,11 +6,12 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:26:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/06 14:50:44 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/20 13:50:50 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 
 t_variables	*__init_variables(t_variables *node, char **v_env)
 {
@@ -93,6 +94,10 @@ int	__init_env(t_shell *shell, char **v_env)
 
 int	__init__(t_shell *shell, char **v_env)
 {
+	shell->sa_bs.sa_handler = SIG_IGN;
+	shell->sa_int.sa_handler = &handle_interrupt;
+	shell->if_sig = 1;
+	shell->say = 0;
 	ft_get_shell(shell);
 	if (__init_env(shell, v_env))
 		return (1);

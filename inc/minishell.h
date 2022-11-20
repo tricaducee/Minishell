@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:56:56 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/20 13:14:43 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/20 13:40:57 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	g_errno;
 /*  ----------------- MAIN ------------------ */
 void			handle_signaux(int sig);
 void			sig_handler(t_shell *shell);
+void			handle_interrupt(int sig);
 
 /* ----------------- __INIT__ --------------- */
 int				__init__(t_shell *shell, char **v_env);
