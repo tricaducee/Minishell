@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:57:32 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/06 14:48:28 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/20 13:08:49 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ int	while_loop(t_shell *shell)
 	(void)shell;
 	while (1)
 	{
-		signal(SIGINT, handle_signaux);
-		read = readline(_static_prompt());
+		sig_handler(shell);
+		read = readline("");
 		if (read)
 		{
 			add_history(read);
 			read_history(read);
-			signal(SIGINT, handle_signaux);
 			cmdli = get_cmds(&read);
 			if (cmdli)
 			{
@@ -66,7 +65,6 @@ int	while_loop(t_shell *shell)
 				;
 			free(read);
 		}
-		write(1, "\n", 1);
 	}
 	return (0);
 }

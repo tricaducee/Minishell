@@ -6,7 +6,7 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:47:16 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/06 14:52:25 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/20 12:54:49 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minishell.h"
 
 
-typedef enum E_type
+typedef enum e_type
 {
 	EMPTY,
 	CMD,
@@ -30,17 +30,24 @@ typedef enum E_type
 	ANDOR
 }			t_type;
 
+typedef struct S_file
+{
+	t_type	type;
+	char	*name;
+}	t_file;
+
 typedef struct S_cmdli
 {
 	char			*cmd;
 	char			**cmd_args;
 	int				*pipe_in;
 	int				*pipe_out;
+	int				pipe;
 	char			*here_doc;
 	int				fd_in;
 	int				fd_out;
 	char			**file_in;
-	char			**file_out;
+	t_file			**file_out;
 	t_type			file_type;
 	int				and_or;
 	pid_t			pid;
@@ -64,12 +71,16 @@ typedef struct S_useful
 
 typedef struct S_shell
 {
-	char		**str_env;
-	char		*line;
-	t_useful	useful;
-	t_variables	*env;
-	t_variables	*export;
-	t_variables	*variables;
+	char				**str_env;
+	char				*line;
+	int					if_sig;
+	int					say;
+	struct sigaction	sa_int;
+	struct sigaction	sa_bs;
+	t_useful			useful;
+	t_variables			*env;
+	t_variables			*export;
+	t_variables			*variables;
 }	t_shell;
 
 #endif

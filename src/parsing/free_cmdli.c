@@ -6,11 +6,26 @@
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 06:39:06 by hrolle            #+#    #+#             */
-/*   Updated: 2022/11/04 11:15:50 by tgoel            ###   ########.fr       */
+/*   Updated: 2022/11/20 13:05:31 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	free_file(t_file **files)
+{
+	unsigned int	i;
+
+	i = 0;
+	if (!files)
+		return ;
+	while (files[i])
+	{
+		free(files[i]->name);
+		free(files[i++]);
+	}
+	free(files);
+}
 
 void	free_content(t_cmdli *cmdli)
 {
@@ -25,15 +40,17 @@ void	free_content(t_cmdli *cmdli)
 	if (cmdli->here_doc)
 		free(cmdli->here_doc);
 	if (cmdli->file_in)
-		free(cmdli->file_in);
+		free_tab(cmdli->file_in);
 	if (cmdli->file_out)
-		free(cmdli->file_out);
+		free_file(cmdli->file_out);
 }
 
 void	free_cmdli(t_cmdli **cmdli)
 {
 	t_cmdli	*tmp;
 
+	if (!cmdli || !*cmdli)
+		return ;
 	*cmdli = cmdli_first(*cmdli);
 	while (*cmdli)
 	{

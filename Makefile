@@ -11,17 +11,17 @@ MAINS	= main.c signaux.c
 BUILS	= cmd_env.c cmd_cd.c cmd_echo.c cmd_exit.c cmd_pwd.c cmd_unset.c cmd_export.c
 UTILS	= __init__.c ft_strlen.c ft_strdup.c ft_strjoin.c free_struct.c change_color.c ft_split.c handle_error.c ft_strcmp.c ft_get_env.c ft_get_export.c ft_get_shell.c \
 		  ft_get_str_env.c ft_get_var.c ft_itoa.c ft_substr.c free_tab_null.c free_nodes.c ft_strinset.c ft_strncmp.c is_uppercase.c ft_atoi.c _static_prompt.c get_branch_name.c \
-		  get_all_files.c
+		  get_all_files.c errors.c p_env.c
 
-PARSS	= add_andor.c add_cmd.c add_file.c add_quote.c cmdli_first.c create_cmdli.c free_cmdli.c get_cmds.c p_env.c print_tab.c type_and_set.c \
-		  add_arg.c add_dquote.c add_pipe.c add_var.c cmdli_utils.c error_cmdli.c free_tab.c heredoc.c print_cmdli.c  split_cmd.c
+PARSS	= add_andor.c add_cmd.c add_file.c add_quote.c cmdli_first.c create_cmdli.c free_cmdli.c get_cmds.c print_tab.c type_and_set.c \
+		  add_arg.c add_dquote.c add_pipe.c add_var.c cmdli_utils.c error_cmdli.c free_tab.c heredoc.c print_cmdli.c split_cmd.c add_wildcard.c
 
 PRINTS = counters/ft_strlen2.c main/flags_check_fd.c print_functions/print_len_fd.c print_functions/print_upx_fd.c	\
 		text_mod/text_mod_fd.c utils/ft_putstr_fd.c counters/len_atoi.c main/ft_printfd.c print_functions/print_o_fd.c print_functions/print_x_fd.c \
 		utils/ft_putchar_fd.c utils/ft_strchr.c counters/nbrlen.c print_functions/print_c_fd.c print_functions/print_s_fd.c text_mod/bright_fd.c \
 		utils/ft_putnbr_fd.c counters/u_nbrlen_base.c print_functions/print_d_fd.c print_functions/print_u_fd.c text_mod/flags_text_fd.c \
 		utils/ft_putnbrb_fd.c
-EXECS	= exec_cmd.c get_absolute_path.c is_builtin.c set_redirection.c build_in_exec.c
+EXECS	= exec_cmd.c get_absolute_path.c is_builtin.c set_redirection.c build_in_exec.c get_path_utils.c
 
 NAME	= minishell
 

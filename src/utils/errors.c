@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signaux.c                                          :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoel <tgoel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/14 16:12:21 by tgoel             #+#    #+#             */
-/*   Updated: 2022/11/20 12:24:11 by tgoel            ###   ########.fr       */
+/*   Created: 2022/11/20 12:59:19 by tgoel             #+#    #+#             */
+/*   Updated: 2022/11/20 13:07:23 by tgoel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+#include "../../printfd/HEADER/ft_printfd.h"
 
-void	handle_signaux(int sig)
+int	return_error(char *debug)
 {
-	(void)sig;
-	printf("\n\n%s", _static_prompt());
+	if (debug)
+		ft_printfd(1, "Here : line %s\n", debug);
+	g_errno = errno;
+	ft_printfd(2, "#+bminishell#0: #/r%s#0\n", strerror(g_errno));
+	return (g_errno);
 }
 
-void	sig_handler(t_shell *shell)
+int	exit_error(void)
 {
-	struct termios	flag;
-
-	if (tcgetattr(0, &flag) != 0)
-		perror("tcgetattr() error");
-	flag.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, TCSANOW, &flag);
-	sigaction(SIGINT, &shell->sa_int, NULL);
-	sigaction(SIGQUIT, &shell->sa_bs, NULL);
-	printf("\n\n%s", _static_prompt());
+	g_errno = errno;
+	ft_printfd(2, "#+wminishell#0: #/r%s#0\n", strerror(g_errno));
+	exit(g_errno);
 }
